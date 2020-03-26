@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LeftSide from './Sections/LeftSide';
-//import RightSide from './Sections/RightSide';
-import { Drawer, Button, Icon } from 'antd';
+import RightSide from './Sections/RightSide';
+import { Drawer, Button } from 'antd';
 import './Sections/NavBar.css';
 
 function NavBar() {
@@ -23,6 +23,7 @@ function NavBar() {
             <div className="menu_container">
                 <div className="menu__left">
                     <LeftSide mode="horizontal" />
+                    <RightSide mode="horizontal" />
                 </div>
                 <div className="menu__right">
                     
@@ -43,7 +44,7 @@ function NavBar() {
                     visible={visible}
                 >
                     <LeftSide mode="inline" />
-                    
+                    <RightSide mode="inline" />
                 </Drawer>
             </div>
         </nav>
