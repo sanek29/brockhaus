@@ -1,8 +1,8 @@
-import React from "react"
-import {Formik} from "formik"
-import * as Yup from "yup"
+import React from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
-import {Form, Input, Button} from "antd"
+import { Form, Input, Button } from "antd";
 
 
 const formItemLayout = {
@@ -67,16 +67,16 @@ function RegisterPage(props) {
                 }, 500);
               }}
         >
-          {props => {
-        const {
-          values,
-          touched,
-          errors,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        } = props;
+        {props => {
+            const {
+            values,
+            touched,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            } = props;
         return (
           <div className="app">
             <h2>Sign up</h2>

@@ -5,54 +5,48 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 function LoginPage() {
-    const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
     const [formErrorMessage, setFormErrorMessage] = useState('')
-    const [rememberMe, setRememberMe] = useState(rememberMeChecked)
-
-    const handleRememberMe = () => {
-            setRememberMe(!rememberMe)
-        };
 
     const initialEmail = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
 
     return (
         <Formik
-      initialValues={{
-        email: initialEmail,
-        password: '',
-      }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .email('Email is invalid')
-          .required('Email is required'),
-        password: Yup.string()
-          .min(6, 'Password must be at least 6 characters')
-          .required('Password is required'),
-      })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          let dataToSubmit = {
-            email: values.email,
-            password: values.password
-          };
-          setSubmitting(false);
-        }, 500);
-      }}
-    >
-      {props => {
-        const {
-          values,
-          touched,
-          errors,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        } = props;
+            initialValues={{
+                email: initialEmail,
+                password: '',
+            }}
+            validationSchema={Yup.object().shape({
+                email: Yup.string()
+                .email('Email is invalid')
+                .required('Email is required'),
+                password: Yup.string()
+                .min(6, 'Password must be at least 6 characters')
+                .required('Password is required'),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                let dataToSubmit = {
+                    email: values.email,
+                    password: values.password
+                };
+                setSubmitting(false);
+                }, 500);
+            }}
+        >
+        {props => {
+            const {
+            values,
+            touched,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            } = props;
         return (
           <div className="app">
 
@@ -98,7 +92,6 @@ function LoginPage() {
               )}
 
               <Form.Item>
-                <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
                 <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
                   forgot password
                   </a>
