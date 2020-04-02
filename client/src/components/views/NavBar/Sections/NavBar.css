@@ -8,43 +8,43 @@
   background-color: white;
 }
 
-.menu_logo {
+.menu__logo {
   width: 150px;
   float: left;
 }
 
-.menu_logo a {
+.menu__logo a {
   display: inline-block;
   font-size: 20px;
   padding: 19px 20px;
 }
 
-.menu_container .ant-menu-item {
+.menu__container .ant-menu-item {
   padding: 0px 5px;
 }
 
-.menu_container .ant-menu-submenu-title {
+.menu__container .ant-menu-submenu-title {
   padding: 10px 20px;
 }
 
-.menu_container .ant-menu-item a,
-.menu_container .ant-menu-submenu-title a {
+.menu__container .ant-menu-item a,
+.menu__container .ant-menu-submenu-title a {
   padding: 10px 15px;
 }
 
-.menu_container .ant-menu-horizontal {
+.menu__container .ant-menu-horizontal {
   border-bottom: none;
 }
 
-.menu_container .menu__left {
+.menu__container .menu_left {
   float: left;
 }
 
-.menu_container .menu__rigth {
+.menu__container .menu_rigth {
   float: right;
 }
 
-.menu_mobile-button {
+.menu__mobile-button {
   float: right;
   height: 32px;
   padding: 6px;
@@ -63,7 +63,7 @@
 }
 
 @media (max-width: 767px) {
-  .menu_mobile-button {
+  .menu__mobile-button {
     display: inline-block !important;
   }
 
@@ -76,12 +76,12 @@
     margin-left: -20px;
   }
 
-  .menu_container .ant-menu-item,
-  .menu_container .ant-menu-submenu-title {
+  .menu__container .ant-menu-item,
+  .menu__container .ant-menu-submenu-title {
     padding: 1px 20px;
   }
 
-  .menu_logo a {
+  .menu__logo a {
     padding: 10px 20px;
   }
 }
