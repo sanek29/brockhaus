@@ -12,7 +12,7 @@ function RightSide(props) {
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
-        props.history.push("login")
+        props.history.push("/login")
       }
       else {
         alert('Logout is failed')
@@ -36,10 +36,10 @@ function RightSide(props) {
     return (
       <Menu mode={props.mode}>
          <Menu.Item key="order">
-          <a href="/product/order">Bestellen</a>
+          <a href="/product/order">order</a>
         </Menu.Item>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Ausloggen</a>
+          <a onClick={logoutHandler}>logout</a>
         </Menu.Item>
       </Menu>
     )
