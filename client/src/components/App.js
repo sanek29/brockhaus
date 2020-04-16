@@ -1,11 +1,15 @@
-import React, {Suspense} from 'react'
-import {Route, Switch} from "react-router-dom"
+import React, {Suspense} from 'react';
+import {Route, Switch} from "react-router-dom";
+import Auth from '../hoc/auth';
 
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer"
+import Footer from "./views/Footer/Footer";
+import OrderPage from './views/OrderPage/OrderPage';
+import HistoryPage from './views/HistoryPage/HistoryPage';
+
 
 function App() {
     return (
@@ -13,15 +17,11 @@ function App() {
             <NavBar />
             <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
                 <Switch>
-                    <Route exact path="/">
-                        <LandingPage />
-                    </Route> 
-                    <Route exact path="/login">
-                        <LoginPage />
-                    </Route>
-                    <Route exact path="/register">
-                        <RegisterPage />
-                    </Route>
+                    <Route exact path="/" component={Auth(LandingPage, null)} />
+                    <Route exact path="/login" component={Auth(LoginPage, false)} />
+                    <Route exact path="/register" component={Auth(RegisterPage, false)} />
+                    <Route exact path="/product/order" component={Auth(OrderPage, true)} />
+                    <Route exact path="/history" component={Auth(HistoryPage, true)} />
                 </Switch>
             </div>
             <Footer />

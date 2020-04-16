@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Button, Form, Input } from 'antd';
 import axios from 'axios';
-import FileUpload from '../../utils/FileUpload'
 
 
 const { Title } = Typography;
@@ -13,7 +12,6 @@ function OrderPage(props) {
   const [TitleValue, setTitleValue] = useState("")
   const [DescriptionValue, setDescriptionValue] = useState("")
   const [PriceValue, setPriceValue] = useState(0)
-  const [Images, setImages] = useState([])
 
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value)
@@ -27,14 +25,10 @@ function OrderPage(props) {
     setPriceValue(event.currentTarget.value)
   }
 
-  const updateImages = (newImages) => {
-    setImages(newImages)
-  }
-
   const onSubmit = (event) => {
     event.preventDefault();
 
-    if (!TitleValue || !DescriptionValue || !PriceValue || !Images) {
+    if (!TitleValue || !DescriptionValue || !PriceValue) {
       return alert('bitte füllen Sie auf')
     }
 
@@ -42,8 +36,7 @@ function OrderPage(props) {
       writer: props.user.userData._id,
       title: TitleValue,
       description: DescriptionValue,
-      price: PriceValue,
-      images: Images
+      price: PriceValue
     }
 
     axios.post('/api/product/uploadProduct', variables)
@@ -66,7 +59,6 @@ function OrderPage(props) {
 
       <Form onSubmit={onSubmit} >
 
-      <FileUpload refreshFunction={updateImages} />
 
         <br />
         <br />
@@ -84,7 +76,7 @@ function OrderPage(props) {
         />
         <br />
         <br />
-        <label>Price()</label>
+        <label>Price(€)</label>
         <Input
           onChange={onPriceChange}
           value={PriceValue}

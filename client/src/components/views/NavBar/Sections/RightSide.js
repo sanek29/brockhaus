@@ -35,7 +35,10 @@ function RightSide(props) {
   else {
     return (
       <Menu mode={props.mode}>
-         <Menu.Item key="order">
+        <Menu.Item key="history">
+          <a href="/history">Bestellliste</a>
+        </Menu.Item>
+        <Menu.Item key="order">
           <a href="/product/order">order</a>
         </Menu.Item>
         <Menu.Item key="logout">
