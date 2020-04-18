@@ -1,19 +1,17 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { setAuthToken } from '~/clients/storage';
 
-//import { loginUser } from "../../../_actions/user_actions";
+import { login } from '~/actions/user';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
-import { useDispatch, Provider } from 'react-redux';
-import { loginUser } from "../../../actions/user_actions";
+import { Form, Input, Button, Typography } from 'antd';
+import { useDispatch } from 'react-redux';
 
 const { Title } = Typography;
 
-function LoginPage(props) {
+export default function() {
   const dispatch = useDispatch();
-
-  const [formErrorMessage, setFormErrorMessage] = useState('')
 
   return (
     <Formik
@@ -21,113 +19,77 @@ function LoginPage(props) {
         email: '',
         password: '',
       }}
+
       validationSchema={Yup.object().shape({
           email: Yup.string()
             .email('Email is invalid')
             .required('Email is required'),
           password: Yup.string()
-            .min(6, 'Password must be at least 6 characters')
             .required('Password is required'),
       })}
+
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-        let dataToSubmit = {
-            email: values.email,
-            password: values.password
+        const dataToSubmit = {
+          email: values.email,
+          password: values.password
         };
 
-        dispatch(loginUser(dataToSubmit))
-          .then(response => {
-            if (response.payload.loginSuccess) {
-              window.localStorage.setItem('userId', response.payload.userId)
-              props.history.push('/')
-            }
-            else {
-              setFormErrorMessage('Password oder Email ist incorrect')
-            }
-          })
-          .catch(err => {
-            setFormErrorMessage('Password oder Email ist incorrect')
-            setTimeout(() => {
-              setFormErrorMessage("")
-            }, 3000)
-          })
+        dispatch(login(dataToSubmit));
 
         setSubmitting(false);
+
         }, 500);
       }}
     >
     {props => {
-      const {
-      values,
-      touched,
-      errors,
-      isSubmitting,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      } = props;
-    return (
-      <div className="app">
+      const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
 
-      <Title level={2}>Log In</Title>
-      <form onSubmit={handleSubmit} style={{ width: '350px' }}>
+      return (
+        <Form onSubmit={handleSubmit} style={{ width: '350px' }}>
+          <Title level={2}>Log In</Title>
+          <Form.Item required>
+            <Input
+              id="email"
+              placeholder="Enter your email"
+              type="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.email && touched.email ? 'text-input error' : 'text-input'
+              }
+            />
+              {errors.email && touched.email && (
+                <div className="input-feedback">{errors.email}</div>
+              )}
+            </Form.Item>
 
-      <Form.Item required>
-        <Input
-          id="email"
-          placeholder="Enter your email"
-          type="email"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          className={
-            errors.email && touched.email ? 'text-input error' : 'text-input'
-          }
-        />
-          {errors.email && touched.email && (
-            <div className="input-feedback">{errors.email}</div>
-          )}
-        </Form.Item>
-
-        <Form.Item required>
-          <Input
-            id="password"
-            placeholder="Enter your password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={
-              errors.password && touched.password ? 'text-input error' : 'text-input'
-            }
-        />
-          {errors.password && touched.password && (
-            <div className="input-feedback">{errors.password}</div>
-          )}
-        </Form.Item>
-
-        {formErrorMessage && (
-          <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{formErrorMessage}</p></label>
-        )}
-
-        <Form.Item>
-          <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
-            forgot password
-            </a>
-          <div>
-            <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
-              Log in
-          </Button>
-          </div>
-          Or <a href="/register">register now!</a>
-        </Form.Item>
-        </form>
-      </div>
-    );
-  }}
-</Formik>
-)
-}
-
-export default withRouter(LoginPage);
+            <Form.Item required>
+              <Input
+                id="password"
+                placeholder="Enter your password"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.password && touched.password ? 'text-input error' : 'text-input'
+                }
+            />
+              {errors.password && touched.password && (
+                <div className="input-feedback">{errors.password}</div>
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Link to="/register">Register</Link>
+              <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                Log in
+              </Button>
+            </Form.Item>
+          </Form>
+      );
+    }}
+    </Formik>
+  )
+};

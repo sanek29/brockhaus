@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { registerUser } from '../../../actions/user_actions';
+import { registration } from '~/actions/user';
 import { useDispatch } from "react-redux";
 
 import { Form, Input, Button } from "antd";
@@ -50,7 +50,6 @@ function RegisterPage(props) {
         .email('Email is invalid')
         .required('Email is required'),
         password: Yup.string()
-        .min(6, 'Password must be at least 6 characters')
         .required('Password is required'),
         confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -66,7 +65,7 @@ function RegisterPage(props) {
             lastname: values.lastname,
           };
 
-          dispatch(registerUser(dataToSubmit)).then(response => {
+          dispatch(registration(dataToSubmit)).then(response => {
             if (response.payload.success) {
               props.history.push("/login")
             }

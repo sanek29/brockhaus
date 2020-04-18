@@ -1,32 +1,23 @@
 import React from "react";
 import { Menu } from "antd";
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
+import { logout } from '~/actions/user';
+import { useDispatch } from 'react-redux';
 
+export default function() {
+  const dispatch = useDispatch();
 
-export default class AuthorizedNav extends React.Component {
-  state = {
-    current: 'history',
-  };
-
-  handleClick = e => {
-    this.setState({
-      current: e.key,
-    });
-  };
-
-  render() {
-    return (
-      <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode='horizontal' theme='dark'>
-        <Menu.Item className='ant-menu-item' key="history">
-          <Link to="/history">Bestellliste</Link>
-        </Menu.Item>
-        <Menu.Item className='ant-menu-item' key="order">
-          <Link to="/product/order">order</Link>
-        </Menu.Item>
-        <Menu.Item className='ant-menu-item' key="logout">
-          <Link>logout</Link>
-        </Menu.Item>
-      </Menu>
-    );
-  }
+  return (
+    <Menu mode='horizontal' theme='dark'>
+      <Menu.Item key="history">
+        <NavLink to="/history">Bestellliste</NavLink>
+      </Menu.Item>
+      <Menu.Item key="order">
+        <NavLink activeClassName='ant-menu-item-selected' to="/product/order">order</NavLink>
+      </Menu.Item>
+      <Menu.Item className='float-right' key="logout">
+        <a onClick={() => dispatch(logout())}>Logout</a>
+      </Menu.Item>
+    </Menu>
+  );
 }

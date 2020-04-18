@@ -1,35 +1,20 @@
 import React from "react";
-import { Menu } from "antd";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const handleClick = e => {
-  this.setState({
-    current: e.key,
-  });
-};
+import { Menu } from "antd";
 
 export default class UnauthorizedNav extends React.Component {
-  state = {
-    current: 'home',
-  };
-
-  handleClick = e => {
-    this.setState({
-      current: e.key,
-    });
-  };
-
   render() {
     return (
-      <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode='horizontal' theme='dark'>
+      <Menu mode='horizontal' theme='dark'>
         <Menu.Item key="home">
-          <Link to='/login'>Home</Link>
+          <NavLink to='/'>Home</NavLink>
         </Menu.Item>
-        <Menu.Item key="signin">
-          <Link to='/login'>Signin</Link>
+        <Menu.Item key="register" className='float-right'>
+          <NavLink to='/register'>Sign up</NavLink>
         </Menu.Item>
-        <Menu.Item key="signup">
-          <Link to='/register'>Signup</Link>
+        <Menu.Item key="login" className='float-right'>
+          <NavLink to='/login'>Sign in</NavLink>
         </Menu.Item>
       </Menu>
     )

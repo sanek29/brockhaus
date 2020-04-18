@@ -7,7 +7,5 @@ import UnauthorizedNav from './UnauthorizedNav';
 export default function() {
   const user = useSelector(state => state.user);
 
-  return (user.userData && user.userData.isAuth)
-    ? <AuthorizedNav/>
-    : <UnauthorizedNav/>;
+  return user.isEmpty() ? <UnauthorizedNav/> : <AuthorizedNav/>;
 }

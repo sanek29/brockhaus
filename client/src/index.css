@@ -19,21 +19,36 @@ body {
   background-color: #fff;
 }
 
-.app {
+.flex-center {
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 129px);
 }
 
 input.error {
   border-color: red;
 }
 
-
 .input-feedback {
   color: red;
   height: 5px;
   margin-top: -12px;
+}
+
+.float-right {
+  float: right;
+}
+
+.ant-layout-header {
+  height: 46px !important;
+}
+
+.ant-notification-notice-with-icon {
+  margin-top: 7px;
+}
+
+.ant-menu-item-selected {
+  padding: 0 20px;
 }

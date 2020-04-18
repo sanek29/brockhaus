@@ -9,11 +9,11 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors());
-app.use(jwt({ secret: process.env.SECRET }).unless({ path: ['/api/token', '/api/register'] }));
+app.use(jwt({ secret: process.env.SECRET }).unless({ path: ['/token', '/register'] }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api', require('./routes/users'));
+app.use('/', require('./routes/users'));
 
 app.use((err, req, res, next) => {
   handleError(err, res);

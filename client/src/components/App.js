@@ -14,24 +14,26 @@ import HistoryPage from './views/HistoryPage/HistoryPage';
 
 const { Header, Content } = Layout;
 
-function App() {
-  return (
-    <Layout>
-      <Header>
-        <NavBar/>
-      </Header>
-      <Content>
-        <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)}/>
-          <Route exact path="/login" component={Auth(LoginPage, false)}/>
-          <Route exact path="/register" component={Auth(RegisterPage, false)}/>
-          <Route exact path="/product/order" component={Auth(OrderPage, true)}/>
-          <Route exact path="/history" component={Auth(HistoryPage, true)}/>
-        </Switch>
-      </Content>
-      <Footer/>
-    </Layout>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <Layout>
+        <Header>
+          <NavBar/>
+        </Header>
+        <Content className='flex-center'>
+          <Switch>
+            <Route exact path="/" component={Auth(LandingPage, null)}/>
+            <Route exact path="/login" component={Auth(LoginPage, false)}/>
+            <Route exact path="/register" component={Auth(RegisterPage, false)}/>
+            <Route exact path="/product/order" component={Auth(OrderPage, true)}/>
+            <Route exact path="/history" component={Auth(HistoryPage, true)}/>
+          </Switch>
+        </Content>
+        <Footer/>
+      </Layout>
+    );
+  }
 }
 
 export default App;
