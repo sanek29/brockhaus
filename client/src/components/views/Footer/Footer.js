@@ -1,15 +1,12 @@
 import React from 'react'
+import { Layout } from 'antd';
 
 function Footer() {
-    return (
-        <div style={{
-            height: '80px', display: 'flex',
-            flexDirection: 'column', alignItems: 'center',
-            justifyContent: 'center', fontSize: '1rem'
-        }}>
-            <p> Footer </p>
-        </div>
-    )
+  return (
+    <Layout.Footer>
+      <p>by Alex</p>
+    </Layout.Footer>
+  )
 }
 
-export default Footer
+export default Footer;

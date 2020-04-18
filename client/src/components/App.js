@@ -1,6 +1,8 @@
-import React, {Suspense} from 'react';
-import {Route, Switch} from "react-router-dom";
+import React from 'react';
+import { Route, Switch } from "react-router-dom";
 import Auth from '../hoc/auth';
+
+import { Layout } from 'antd';
 
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
@@ -10,23 +12,26 @@ import Footer from "./views/Footer/Footer";
 import OrderPage from './views/OrderPage/OrderPage';
 import HistoryPage from './views/HistoryPage/HistoryPage';
 
+const { Header, Content } = Layout;
 
 function App() {
-    return (
-        <Suspense fallback={(<div>Loading...</div>)}>
-            <NavBar />
-            <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
-                <Switch>
-                    <Route exact path="/" component={Auth(LandingPage, null)} />
-                    <Route exact path="/login" component={Auth(LoginPage, false)} />
-                    <Route exact path="/register" component={Auth(RegisterPage, false)} />
-                    <Route exact path="/product/order" component={Auth(OrderPage, true)} />
-                    <Route exact path="/history" component={Auth(HistoryPage, true)} />
-                </Switch>
-            </div>
-            <Footer />
-        </Suspense>
-    );
-  }
-  
-  export default App;
+  return (
+    <Layout>
+      <Header>
+        <NavBar/>
+      </Header>
+      <Content>
+        <Switch>
+          <Route exact path="/" component={Auth(LandingPage, null)}/>
+          <Route exact path="/login" component={Auth(LoginPage, false)}/>
+          <Route exact path="/register" component={Auth(RegisterPage, false)}/>
+          <Route exact path="/product/order" component={Auth(OrderPage, true)}/>
+          <Route exact path="/history" component={Auth(HistoryPage, true)}/>
+        </Switch>
+      </Content>
+      <Footer/>
+    </Layout>
+  );
+}
+
+export default App;
