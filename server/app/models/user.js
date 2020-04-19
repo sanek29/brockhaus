@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN
     }
   }, {});
 
@@ -33,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     return await new Promise((resolve, reject) => {
       bcrypt.compare(password, this.password, (err, result) => {
         if (err) reject(err);
-        console.log(result);
         resolve(result);
       })
     });

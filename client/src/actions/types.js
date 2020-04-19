@@ -1,3 +1,8 @@
-export const REGISTER_USER = 'user/register';
-export const LOGGED_IN = 'user/logged';
-export const LOGOUT_USER = 'user/logout';
+export const REGISTER_USER = 'REGISTER_USER';
+export const LOGGED_IN = 'USER_LOGGED_IN';
+export const LOGOUT_USER = 'USER_LOG_OUT';
+
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const ADD_ORDER_SUCCESS = 'ADD_ORDER_SUCCESS';
+
+export const FETCH_MENU_ITEM_SUCCESS = 'FETCH_MENU_ITEM_SUCCESS';

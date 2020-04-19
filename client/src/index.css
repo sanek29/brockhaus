@@ -49,6 +49,35 @@ input.error {
   margin-top: 7px;
 }
 
-.ant-menu-item-selected {
+.ant-menu-item {
+  padding: 0 !important;
+  /*margin: 0 !important;*/
+}
+
+.ant-layout-header li a {
   padding: 0 20px;
+}
+
+.ant-layout-header a.active {
+  background-color: #1890ff;
+  color: #FFF !important;
+}
+
+.ant-list-item-meta-description {
+  width: 350px;
+}
+
+.pay-button {
+  padding: 5px !important;
+  margin-left: 10px;
+}
+
+.make-order-form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.make-order-form button {
+  margin-top: 10px;
 }

@@ -10,6 +10,7 @@ const HTTP_ERROR_MESSAGES = {
   401: 'Unauthorized',
   403: 'No Permission',
   404: 'Not Found',
+  500: 'Server error'
 };
 
 class APIException {

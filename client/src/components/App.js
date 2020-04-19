@@ -1,33 +1,41 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
-import Auth from '../hoc/auth';
+import { connect } from 'react-redux';
 
 import { Layout } from 'antd';
 
-import LandingPage from "./views/LandingPage/LandingPage.js";
-import LoginPage from "./views/LoginPage/LoginPage.js";
-import RegisterPage from "./views/RegisterPage/RegisterPage.js";
-import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer";
-import OrderPage from './views/OrderPage/OrderPage';
-import HistoryPage from './views/HistoryPage/HistoryPage';
+import Home from "./views/Home";
+import LoginPage from "./views/Login";
+import Registration from "./views/Registration";
+import Navigation from "./views/Navigation";
+import Footer from "./views/Footer";
+import NewOrder from './views/Orders/New';
+import OrdersList from './views/Orders/List';
+
+import { loginCheck } from '~/actions/user';
+import { fetchOrdersList } from '~/actions/orders';
 
 const { Header, Content } = Layout;
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.loginCheck();
+    this.props.fetchOrdersList();
+  }
+
   render() {
     return (
       <Layout>
         <Header>
-          <NavBar/>
+          <Navigation/>
         </Header>
         <Content className='flex-center'>
           <Switch>
-            <Route exact path="/" component={Auth(LandingPage, null)}/>
-            <Route exact path="/login" component={Auth(LoginPage, false)}/>
-            <Route exact path="/register" component={Auth(RegisterPage, false)}/>
-            <Route exact path="/product/order" component={Auth(OrderPage, true)}/>
-            <Route exact path="/history" component={Auth(HistoryPage, true)}/>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/login" component={LoginPage}/>
+            <Route exact path="/register" component={Registration}/>
+            <Route exact path="/orders/new" component={NewOrder}/>
+            <Route exact path="/orders" component={OrdersList}/>
           </Switch>
         </Content>
         <Footer/>
@@ -36,4 +44,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { loginCheck, fetchOrdersList })(App);
